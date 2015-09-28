@@ -1,0 +1,20 @@
+/* Circle */
+
+.cicle {
+border-radius: 30px;
+    width: 50px;
+    height: 50px;
+
+    color:black;
+    background-color:blueviolet;
+float: left;
+    margin-right: 4px;
+
+}
+.cicle:before, .cicle:after{
+    clear: both;
+}
+.green{background: green}
+.orange{background: orange}
+.red{background: red}
+.yellow{background: yellow}
