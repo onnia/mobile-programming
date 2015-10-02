@@ -17,9 +17,15 @@
 }
 .green.circle{
     background: green;
+    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, lightgreen 0%, green 100%);
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, lightgreen, green);
+    background-image: radial-gradient(45px 45px 45deg, circle cover, lightgreen 0%, green 100%);
 }
 .orange.circle{
-    background: orange;
+    background: darkorange;
+    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, orangered 0%, darkorange 100%);
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, orangered, darkorange);
+    background-image: radial-gradient(45px 45px 45deg, circle cover, orangered 0%, darkorange 100%);
 }
 .red.circle{
     background: red;
@@ -32,6 +38,9 @@
     background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
     background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
     background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+}
+.circle.active {
+    background: white;
 }
 .center {
     padding: 0px 10%;
