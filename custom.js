@@ -1,21 +1,15 @@
 
 $( document ).ready(function() {
-
     startgame();
     //addactiveclass();
     hitabutton();
     // updatecounter();
     //  timer();
 
-
-
-
-
 });
 
 
 function intervalcounter() {
-
     var counter = 1000;
     var myFunction = function () {
         clearInterval(interval);
@@ -27,9 +21,7 @@ function intervalcounter() {
         hitabutton();
     }
     var interval = setInterval(myFunction, counter);
-
 }
-
 
 /* TODO:
  * Create a timer
@@ -47,11 +39,7 @@ function intervalcounter() {
   *
   * */
 
-
-
 function startgame (){
-
-
     var pause = $('#pause-game');
     var start = $('#start-game');
 
@@ -63,11 +51,8 @@ function startgame (){
         // randomselect();
         time_spent();
         // pausegame();
-
         hitabutton();
         intervalcounter();
-
-
     });
 }
 
@@ -96,7 +81,6 @@ function randomselect (){
     }
     var buttonidselector = $('#'+buttonid+'');
 
-
     // Add active class to the selected id
     buttonidselector.addClass("active");
 
@@ -107,34 +91,25 @@ function randomselect (){
 
 function hitabutton(){
     var circle = randomselect();
-
     //save value to variable and create selector
     var id = $(circle);
-
     console.log(id);
-
     // if active id button is clicked
     if (id.hasClass('active')) {
         id.on("click", function (e) {
             var click = true;
             e.preventDefault();
-
             console.log('clicked button ' + id);
             // Add new count
             updatecounter();
-
             // Remove Active class from siblings
             $(this).siblings().removeClass('active');
             $(this).removeClass('active');
-
             $(this).delay(100).queue(function () {
             });
-
-
             // Call again new button
             nextselection = randomselect();
             console.log('Next button is ' + nextselection);
-
         });
     }
 }
@@ -143,13 +118,9 @@ function timer(){
     function timegoesby(){
         $(".button").click()
     }
-
     setTimeout(function() {
         timegoesby();
     }, 7000);
-
-
-
     hitabutton();
 }
 
