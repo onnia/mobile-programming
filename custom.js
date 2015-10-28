@@ -2,23 +2,32 @@
 $( document ).ready(function() {
     startgame();
     //addactiveclass();
-    hitabutton();
+    //  hitabutton();
     // updatecounter();
     //  timer();
+    //activebutton();
 
+
+    if (Cookies.get('topscore')){
+       var score = Cookies.get('topscore');
+        $('#topscore').html(score);
+
+    } else {
+        Cookies.set('topscore', '0', { expires: 365, path: '' });
+    }
 });
 
 
 function intervalcounter() {
-    var counter = 1000;
+    /*This is the start time*/
+    var counter = 3000;
     var myFunction = function () {
         clearInterval(interval);
         counter *= 0.999;
         interval = setInterval(myFunction, counter);
-        console.log(counter);
         $('#interval').html(counter);
-        updatecounter();
-        hitabutton();
+        updateamuoutcounter();
+        activebutton();
     }
     var interval = setInterval(myFunction, counter);
 }
@@ -33,11 +42,11 @@ function intervalcounter() {
  * When a timer starts active class is added
  * check
  * when button is clicked clicking period slows down
-  *
-  * Create a function that returns a click event of active button
-  *
-  *
-  * */
+ *
+ * Create a function that returns a click event of active button
+ *
+ *
+ * */
 
 function startgame (){
     var pause = $('#pause-game');
@@ -45,14 +54,12 @@ function startgame (){
 
     start.click(function(e){
         e.preventDefault();
-        // pause.removeClass('hide');
         start.addClass('hide');
-       // console.log("Start game");
-        // randomselect();
+        // console.log("Start game");
         time_spent();
         // pausegame();
-        hitabutton();
         intervalcounter();
+        activebutton();
     });
 }
 
@@ -68,7 +75,6 @@ function pausegame(){
 
 function randomselect (){
     var num = (Math.floor(Math.random()*4))+1;
-    //  $('.circle:nth-child('+ num +')').toggleClass("active");
 
     if (num == 1) {
         buttonid = 'green';
@@ -81,64 +87,55 @@ function randomselect (){
     }
     var buttonidselector = $('#'+buttonid+'');
 
-    // Add active class to the selected id
+    // We should not have active class if you have pressed button at a time.
+    if ($(".circle").hasClass('active')){
+        checkmistake();
+        $(".circle").removeClass("active");
+    }
     buttonidselector.addClass("active");
-
-    console.log('Selected button '+ buttonidselector.selector);
 
     return buttonidselector.selector;
 }
 
-function hitabutton(){
-    var circle = randomselect();
+
+function checkmistake(){
+    var count = $('#count-amount').html();
+    var click = $('#click-amount').html();
+
+    if (click < count){
+        console.log('You lose');
+
+        Cookies.set('topscore', click, { expires: 365, path: '' });
+
+    } else if (count == click){
+        console.log('You are safe!');
+    }
+    var count = null;
+    var click = null;
+}
+
+
+function activebutton(){
     //save value to variable and create selector
+    var circle = randomselect();
     var id = $(circle);
-    console.log(id);
-    // if active id button is clicked
-    if (id.hasClass('active')) {
-        id.on("click", function (e) {
-            var click = true;
-            e.preventDefault();
-            console.log('clicked button ' + id);
-            // Add new count
-            updatecounter();
-            // Remove Active class from siblings
-            $(this).siblings().removeClass('active');
-            $(this).removeClass('active');
-            $(this).delay(100).queue(function () {
-            });
-            // Call again new button
-            nextselection = randomselect();
-            console.log('Next button is ' + nextselection);
-        });
-    }
+    var active = 'active';
+
+    id.one('click touchstart', function () {
+        id.removeClass('active');
+        updateclickcounter();
+    });
 }
 
-function timer(){
-    function timegoesby(){
-        $(".button").click()
-    }
-    setTimeout(function() {
-        timegoesby();
-    }, 7000);
-    hitabutton();
-}
-
-
-
-function speedup(){
-    setInterval(function(){
-        orginaltime = 4000;
-    },10000)
-
-    orginaltime = 4000;
-    // console.log(orginaltime);
-    //return orginaltime;
-}
-
-function updatecounter(){
+function updateamuoutcounter(){
     $('#count-amount').html(function(i, val) {
-           // console.log("clicked " + val);
+            return (val*1)+1
+        }
+    );
+}
+
+function updateclickcounter(){
+    $('#click-amount').html(function(i, val) {
             return (val*1)+1
         }
     );
