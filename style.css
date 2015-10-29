@@ -11,6 +11,7 @@
 
     box-shadow: 0px 0px 1px 4px black;
     font-size: 10px;
+    margin-bottom: 15px;
 }
 .circle:before, .circle:after{
     clear: both;
@@ -40,7 +41,7 @@
     background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 }
 .circle.active {
-    background: white;
+    background: rgba(255,255,70,0.8);
 }
 .center {
     padding: 0px 10%;
@@ -66,4 +67,20 @@ a.start-game {
 }
 .show{
     display: block;
+}
+.loser{
+    display: none;
+    background: rgba(228,38,65,0.9);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+.loser span{
+    font-size: 40px;
+}
+.loser .center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }

@@ -1,12 +1,6 @@
 
 $( document ).ready(function() {
     startgame();
-    //addactiveclass();
-    //  hitabutton();
-    // updatecounter();
-    //  timer();
-    //activebutton();
-
 
     if (Cookies.get('topscore')){
        var score = Cookies.get('topscore');
@@ -20,12 +14,12 @@ $( document ).ready(function() {
 
 function intervalcounter() {
     /*This is the start time*/
-    var counter = 3000;
+    var counter = 2000;
     var myFunction = function () {
         clearInterval(interval);
         counter *= 0.999;
         interval = setInterval(myFunction, counter);
-        $('#interval').html(counter);
+        $('#odometer5').html(counter);
         updateamuoutcounter();
         activebutton();
     }
@@ -55,9 +49,7 @@ function startgame (){
     start.click(function(e){
         e.preventDefault();
         start.addClass('hide');
-        // console.log("Start game");
         time_spent();
-        // pausegame();
         intervalcounter();
         activebutton();
     });
@@ -97,18 +89,21 @@ function randomselect (){
     return buttonidselector.selector;
 }
 
-
 function checkmistake(){
     var count = $('#count-amount').html();
     var click = $('#click-amount').html();
+    var loser = $('.loser');
 
     if (click < count){
         console.log('You lose');
+        loser.show();
 
-        Cookies.set('topscore', click, { expires: 365, path: '' });
-
-    } else if (count == click){
-        console.log('You are safe!');
+        if (Cookies.get('topscore') < click){
+            Cookies.set('topscore', click, { expires: 365, path: '' });
+            $('#score_loser').html(click);
+        }
+        $('#topscore_loser').html(Cookies.get('topscore'));
+        $('#score_loser').html(click);
     }
     var count = null;
     var click = null;
@@ -127,6 +122,12 @@ function activebutton(){
     });
 }
 
+function time_spent(){
+    var d = new Date();
+    d.setMinutes(d.getMinutes());
+    $('#timer').tinyTimer({ from: d });
+}
+
 function updateamuoutcounter(){
     $('#count-amount').html(function(i, val) {
             return (val*1)+1
@@ -139,10 +140,4 @@ function updateclickcounter(){
             return (val*1)+1
         }
     );
-}
-
-function time_spent(){
-    var d = new Date();
-    d.setMinutes(d.getMinutes());
-    $('#timer').tinyTimer({ from: d });
 }
