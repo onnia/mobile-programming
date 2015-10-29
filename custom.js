@@ -1,4 +1,3 @@
-
 $( document ).ready(function() {
     startgame();
 
@@ -13,7 +12,7 @@ $( document ).ready(function() {
 
 function intervalcounter() {
     /*This is the start time*/
-    var counter = 1000;
+    var counter = 1400;
     var myFunction = function () {
         clearInterval(interval);
         counter *= 0.999;
