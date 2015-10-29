@@ -99,7 +99,7 @@ function activebutton(){
     var id = $(circle);
     var active = 'active';
 
-    id.one('click touchstart', function () {
+    id.one('click touch', function () {
         id.removeClass('active');
         updateclickcounter();
     });
