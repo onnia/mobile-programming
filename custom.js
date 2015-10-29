@@ -11,10 +11,9 @@ $( document ).ready(function() {
     }
 });
 
-
 function intervalcounter() {
     /*This is the start time*/
-    var counter = 2000;
+    var counter = 1000;
     var myFunction = function () {
         clearInterval(interval);
         counter *= 0.999;
@@ -25,22 +24,6 @@ function intervalcounter() {
     }
     var interval = setInterval(myFunction, counter);
 }
-
-/* TODO:
- * Create a timer
- * check
- * Create a Start for timer
- * check
- * Create a Pause for timer
- * not check
- * When a timer starts active class is added
- * check
- * when button is clicked clicking period slows down
- *
- * Create a function that returns a click event of active button
- *
- *
- * */
 
 function startgame (){
     var pause = $('#pause-game');
