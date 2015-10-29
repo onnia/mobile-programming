@@ -80,7 +80,9 @@ a.start-game {
     font-size: 40px;
 }
 .loser .center {
-    display: table-cell;
     vertical-align: middle;
     text-align: center;
+    margin: 0 auto;
+    float: none;
+    width: 100%;
 }
